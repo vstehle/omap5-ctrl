@@ -1,0 +1,16 @@
+Source: omap5-ctrl
+Section: misc
+Priority: extra
+Maintainer: Vincent Stehlé <v-stehle@ti.com>
+Build-Depends: debhelper (>= 8.0.0), libftdi-dev
+Standards-Version: 3.9.3
+Homepage: https://github.com/prpplague/omap5-ctrl
+Vcs-Git: git://github.com/vstehle/omap5-ctrl.git
+Vcs-Browser: https://github.com/vstehle/omap5-ctrl
+
+Package: omap5-ctrl
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: PandaBoard 5 power control tool
+ mpsse mode for controlling power on/off/reset and checking status of
+ LEDS on omap5432 based PandaBoard 5

@@ -1,0 +1,48 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH OMAP5-CTRL 1 "September  4, 2012"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+omap5-ctrl \- PandaBoard 5 power control tool
+.SH SYNOPSIS
+.B omap5-ctrl
+.RI [ options ] ...
+.SH DESCRIPTION
+This manual page documents briefly the
+.B omap5-ctrl
+command.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
+.\" respectively.
+\fBomap5-ctrl\fP is a mpsse mode tool for controlling power on/off/reset and checking status of LEDS on omap5432 based PandaBoard 5.
+.SH OPTIONS
+A summary of options is included below.
+.TP
+.B \-h
+Show summary of options.
+.TP
+.B \-p \<value\>
+Power the board; 0 for off 1 for on.
+.TP
+.B \-r
+Perform a board reset.
+.br
+.SH AUTHOR
+omap5-ctrl was written by David Anders <x0132446@ti.com>.
+.PP
+This manual page was written by Vincent Stehlé <v-stehle@ti.com>,
+for the Debian project (and may be used by others).

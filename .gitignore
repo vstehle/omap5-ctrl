@@ -1,0 +1,6 @@
+/.pc/
+/debian/*.debhelper.log
+/debian/*.substvars
+/debian/files
+/debian/omap5-ctrl/
+/omap5-ctrl
