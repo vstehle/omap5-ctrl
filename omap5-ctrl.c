@@ -24,8 +24,10 @@
 #include <unistd.h>
 #include <ftdi.h>
 
-#define LOWER_BANK	0x82
-#define UPPER_BANK	0x83
+#define WR_LO_BANK	0x80
+#define RD_LO_BANK	0x81
+#define WR_HI_BANK	0x82
+#define RD_HI_BANK	0x83
 #define GPIO_DIR	0x20
 #define GPIO_PWR_HI	0x20
 #define GPIO_PWR_LO	0x00
@@ -35,13 +37,13 @@ static int set_power_button(struct ftdi_context ftdic, int level)
 	unsigned char buf[3];
 	int f;
 
-	buf[0] = LOWER_BANK;
+	buf[0] = WR_HI_BANK;
 	if (level)
 		buf[1] = GPIO_PWR_HI;
 	else
 		buf[1] = GPIO_PWR_LO;
 
-	buf[2] = 0x20;
+	buf[2] = GPIO_DIR;
 
 	f = ftdi_write_data(&ftdic, buf, sizeof(buf));
 	if (f < 0) {
@@ -58,7 +60,7 @@ static int check_pwr_led(struct ftdi_context ftdic, int expect)
 {
 	unsigned char buf[3], buf_return[3];
 	int f, i;
-	buf[0] = UPPER_BANK;
+	buf[0] = RD_HI_BANK;
 
 	for (i = 0; i < 15 ; i++) {
 		f = ftdi_write_data(&ftdic, buf, 1);
