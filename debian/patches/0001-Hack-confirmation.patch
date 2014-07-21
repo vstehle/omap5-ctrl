@@ -1,0 +1,73 @@
+From: =?utf-8?q?Vincent_Stehl=C3=A9?= <vincent.stehle@laposte.net>
+Date: Mon, 21 Jul 2014 14:36:53 +0200
+Subject: Hack confirmation
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Vincent Stehlé <vincent.stehle@laposte.net>
+---
+ omap5-ctrl.c | 40 ++++++++++++++++++++--------------------
+ 1 file changed, 20 insertions(+), 20 deletions(-)
+
+diff --git a/omap5-ctrl.c b/omap5-ctrl.c
+index afa2da2..e9f4af6 100644
+--- a/omap5-ctrl.c
++++ b/omap5-ctrl.c
+@@ -56,24 +56,24 @@ static int set_power_button(struct ftdi_context ftdic, int level)
+ 	return 0;
+ }
+ 
+-static int check_pwr_led(struct ftdi_context ftdic, int expect)
+-{
+-	unsigned char buf[3], buf_return[3];
+-	int f, i;
+-	buf[0] = RD_HI_BANK;
+-
+-	for (i = 0; i < 15 ; i++) {
+-		f = ftdi_write_data(&ftdic, buf, 1);
+-		f = ftdi_read_data(&ftdic, buf_return, 1);
+-		buf_return[0] &= (1<<1);
+-		if (buf_return[0] == expect)
+-			break;
+-		sleep(1);
+-	}
+-
+-	return 0;
+-
+-}
++//static int check_pwr_led(struct ftdi_context ftdic, int expect)
++//{
++//	unsigned char buf[3], buf_return[3];
++//	int f, i;
++//	buf[0] = RD_HI_BANK;
++//
++//	for (i = 0; i < 15 ; i++) {
++//		f = ftdi_write_data(&ftdic, buf, 1);
++//		f = ftdi_read_data(&ftdic, buf_return, 1);
++//		buf_return[0] &= (1<<1);
++//		if (buf_return[0] == expect)
++//			break;
++//		sleep(1);
++//	}
++//
++//	return 0;
++//
++//}
+ 
+ static int power_ctrl(struct ftdi_context ftdic, int status)
+ {
+@@ -86,11 +86,11 @@ static int power_ctrl(struct ftdi_context ftdic, int status)
+ 		printf("waiting for power on confirmation...\n");
+ 		sleep(1);
+ 		set_power_button(ftdic, 1);
+-		check_pwr_led(ftdic, 0x00);
++//		check_pwr_led(ftdic, 0x00);
+ 		printf("done!\n");
+ 	} else {
+ 		printf("waiting for power off confirmation...\n");
+-		check_pwr_led(ftdic, 0x02);
++//		check_pwr_led(ftdic, 0x02);
+ 		set_power_button(ftdic, 1);
+ 		printf("done!\n");
+ 	}
