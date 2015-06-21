@@ -103,6 +103,9 @@ static void show_help(void)
 	printf("Usage: omap5-ctrl -p value -r -l\n");
 	printf("Where -p value   = power the board 0 for off 1 for on\n");
 	printf("      -r         = perform a board reset\n");
+	printf("      -d descr   = select usb device by description\n");
+	printf("                   For example: 'd:003/009'\n");
+	printf("                   Refer to libftdi documentation\n");
 }
 
 
@@ -112,9 +115,13 @@ int main(int argc, char **argv)
 	int f;
 	int opt;
 	int req_pattern = -1;
+	char *descr_string = NULL;
 
-	while ((opt = getopt(argc, argv, "hrp:")) != -1) {
+	while ((opt = getopt(argc, argv, "hrp:d:")) != -1) {
 		switch (opt) {
+		case 'd':
+			descr_string = optarg;
+			break;
 		case 'p':
 			req_pattern = atoi(optarg);
 			break;
@@ -139,7 +146,16 @@ int main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 	ftdi_set_interface(&ftdic, INTERFACE_B);
-	f = ftdi_usb_open(&ftdic, 0x0403, 0x6010);
+
+	if (descr_string) {
+		// Device string given.
+		f = ftdi_usb_open_string(&ftdic, descr_string);
+
+	} else {
+		// Open the first device by VID:PID.
+		f = ftdi_usb_open(&ftdic, 0x0403, 0x6010);
+	}
+
 	if (f < 0 && f != -5) {
 		fprintf(stderr, "unable to open ftdi device: %d (%s)\n",
 		f, ftdi_get_error_string(&ftdic));

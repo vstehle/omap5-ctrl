@@ -41,3 +41,8 @@ omap5-ctrl$ sudo ./omap5-ctrl -p 1
 waiting for power on confirmation...
 done!
 
+
+It is possible to select the FTDI device more finely by supplying a
+description string with option -d. Refer to libftdi documentation of
+function ftdi_usb_open_string() for all available formats at
+http://www.intra2net.com/en/developer/libftdi/documentation/.
