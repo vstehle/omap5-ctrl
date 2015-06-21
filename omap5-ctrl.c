@@ -59,12 +59,12 @@ static int set_power_button(struct ftdi_context ftdic, int level)
 static int check_pwr_led(struct ftdi_context ftdic, int expect)
 {
 	unsigned char buf[3], buf_return[3];
-	int f, i;
+	int i;
 	buf[0] = RD_HI_BANK;
 
 	for (i = 0; i < 15 ; i++) {
-		f = ftdi_write_data(&ftdic, buf, 1);
-		f = ftdi_read_data(&ftdic, buf_return, 1);
+		ftdi_write_data(&ftdic, buf, 1);
+		ftdi_read_data(&ftdic, buf_return, 1);
 		buf_return[0] &= (1<<1);
 		if (buf_return[0] == expect)
 			break;
